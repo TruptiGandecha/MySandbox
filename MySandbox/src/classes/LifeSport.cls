@@ -1,3 +1,4 @@
+//Code for VF Page
 public with sharing class LifeSport{
 
     public String var {get; set;}
