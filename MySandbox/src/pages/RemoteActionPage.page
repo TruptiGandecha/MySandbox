@@ -1,0 +1,7 @@
+<apex:page controller="SampleRemoteActionController">
+  <script>
+  SampleRemoteActionController.getString(function(result,event){
+  alert(result);
+  });
+  </script>
+</apex:page>

@@ -1,0 +1,66 @@
+<apex:page Controller="cscfga.CloneConfigController"  showHeader="false"  sidebar="false">
+
+    <!--
+    //#####################################################################
+    //# Apex page to Clone an existing Config to an existing bundle    
+    //# CPS 04/10/2010
+    //#
+    -->
+
+    <apex:form >
+    
+        <apex:pageBlock title="{!$Label.clinconf_Copy_Configuration}">
+        
+          <apex:pageBlock >
+              <h2>{!$Label.clinconf_Create_a_copy_of_Configuration} '{!SourceConfiguration.Name}' {!$Label.clinconf_within_the_same_Bundle}</h2>
+              <apex:pageBlockButtons location="bottom">
+                  <apex:commandButton value="{!$Label.clinconf_Copy_Configuration_to_same_bundle}" action="{!cloneConfigSame}" immediate="true" />
+                  <apex:commandButton value="{!$Label.clinconf_Cancel}" action="javascript:window.close();" immediate="true" />
+              </apex:pageBlockButtons>
+              <apex:Messages />
+          </apex:pageBlock>
+          
+          <apex:pageBlock >
+             <h2>{!$Label.clinconf_Copy_Configuration} '{!SourceConfiguration.Name}' {!$Label.clinconf_to_another_Bundle}</h2>
+             <br />
+             <br />
+             <table width="90%" cellpadding="1" cellspacing="1">
+                 <tr>
+                     <td><b>{!$Label.clinconf_Step_1}</b> {!$Label.clinconf_Select_opportunity_containing_the_target_Bundle}</td>
+                     <td>
+                         <apex:inputField id="selOpportunity" value="{!tempBundle.cscfga__Opportunity__c}" required="false" />
+                         <apex:outputPanel styleClass="errorMsg" layout="block" rendered="{!LEN(errorMessageOpportunity)>0}">{!errorMessageOpportunity}</apex:outputPanel>
+                     </td>
+                </tr>
+                 <tr>
+                     <td><b>{!$Label.clinconf_Step_2}</b> {!$Label.clinconf_Get_the_bundles_for_the_destination_Opportunity}</td>
+                     <td>
+                         <apex:commandLink action="{!getBundles}" title="{!$Label.clinconf_Get_Bundles}...">{!$Label.clinconf_Get_Bundles}</apex:commandLink> 
+                     </td>
+                 </tr>
+                 <tr>
+                     <td><b>{!$Label.clinconf_Step_3}</b> {!$Label.clinconf_Select_the_target_Bundle_within_the_chosen_Opportunity}</td>
+                     <td>
+                         <apex:selectList id="selBundle" size="1" value="{!selectedBundle}" >
+                             <apex:selectOptions Value="{!BundleOptions}"></apex:selectOptions>
+                         </apex:selectList>
+                         <apex:outputPanel styleClass="errorMsg" layout="block" rendered="{!LEN(errorMessageBundle)>0}">{!errorMessageBundle}</apex:outputPanel>
+                     </td>
+                 </tr>
+                 <tr>
+                     <td><b>{!$Label.clinconf_Step_4}</b> {!$Label.clinconf_Click_the} <i>{!$Label.clinconf_Copy_Configuration}</i> {!$Label.clinconf_button_below_to_start_the_copy_process}</td>
+                     <td>&nbsp; </td>
+                 </tr>
+             </table>
+             
+              <apex:pageBlockButtons location="bottom">
+                  <apex:commandButton value="{!$Label.clinconf_Copy_Configuration_to_specified_Bundle}" action="{!cloneConfig}" />
+                  <apex:commandButton value="{!$Label.clinconf_Cancel}" action="javascript:window.openner.refresh(); window.close();" immediate="true" />
+              </apex:pageBlockButtons>
+              <apex:Messages />
+              
+            </apex:pageBlock>
+        </apex:pageBlock>
+    </apex:form>
+    
+</apex:page>

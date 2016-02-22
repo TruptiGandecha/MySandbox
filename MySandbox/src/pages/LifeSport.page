@@ -1,0 +1,33 @@
+<apex:page controller="LifeSport" showheader="false">
+
+<apex:form >
+
+    <apex:pageBlock id="in" title="You may edit your details"  rendered="{!NOT(render)}"> 
+    <apex:pageBlockSection title="User Information" columns="1">    
+    <apex:inputField value="{!u.name}" id="userName" />
+    <apex:inputField value="{!u.Email}" id="userEmail"/>
+    <apex:inputField value="{!u.Title}" id="userAddress"/>
+    <apex:inputField value="{!u.CompanyName}" id="userCompanyName"/>
+    <apex:inputField value="{!u.MobilePhone}" id="userMobilePhone"/>
+    </apex:pageBlockSection>
+    
+    <apex:pageMessages />
+    <apex:pageBlockButtons location="Bottom">
+    <apex:commandButton value="Save" action="{!save}" status="status"/>
+    </apex:pageBlockButtons>
+    </apex:pageBlock>
+    
+</apex:form>
+
+    <apex:pageBlock id="out" title="Changes made by you can be viewed below" rendered="{!render}">
+    <apex:actionStatus startText="updating..." id="status" />
+    <apex:pageBlockSection >
+    <apex:outputField value="{!u.name}"/>
+    <apex:outputField value="{!u.Email}"/>
+    <apex:outputField value="{!u.Title}"/>
+    <apex:outputField value="{!u.CompanyName}"/>
+    <apex:outputField value="{!u.MobilePhone}" id="userMobilePhone"/> 
+    </apex:pageBlockSection>
+    </apex:pageBlock>
+
+</apex:page>

@@ -1,0 +1,26 @@
+<apex:page controller="LifeSport">
+<apex:form >
+    <apex:pageBlock id="in" title="Please select a user to view the details"> 
+    <apex:pageBlockSection title="User Information" columns="1">    
+    <apex:selectList multiselect="false" size="1" value="{!var}">
+    <apex:selectOptions value="{!userList}">
+    </apex:selectOptions>
+    </apex:selectList>
+    </apex:pageBlockSection>
+    <apex:pageMessages />
+    </apex:pageBlock>
+</apex:form>
+
+    <apex:pageBlock id="out" title="Please find the User Details Below">
+    <apex:pageBlockSection >
+    <apex:dataTable value="{!userDetails}" var="userDetails">
+    <apex:column title="UserName">
+    <apex:outputText value="{!userDetails.name}" />
+    </apex:column>
+    <apex:column title="UserEmail">
+    <apex:outputText value="{!userDetails.Email}"/>
+    </apex:column>
+    </apex:dataTable>
+    </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>
